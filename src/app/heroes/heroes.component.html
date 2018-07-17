@@ -1,0 +1,9 @@
+<h2>Liste des heros connus : </h2>
+<div class="hero-list">
+<div class="hero" *ngFor="let hero of heroes; first as isFirstHero">
+  <h4>Hero n°{{hero.id}}</h4>
+  <span class="label">Nom :</span>
+  <span>{{hero.name}}</span>
+
+</div>
+</div>
