@@ -1,18 +1,20 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<h1>{{title}}</h1>
-<app-heroes #heroesComp></app-heroes>
-<div class="hero-edit">
-    <h2>Ajouter un nouveau hero</h2>
-    <form #heroForm="ngForm" (ngSubmit)="validateHero($event, heroForm)">
-      <div style="display: inline-block">
-      <label for="name">Nom:</label>
-      <input id="name" name="name"  #nameControl="ngModel" [(ngModel)]="newHeroName" required />
-     </div>
-     <span class="error" *ngIf="nameControl.invalid && nameControl.dirty" >
-         Nom du hero obligatoire
-        </span>
-    <button [disabled]="!heroForm.valid">Valider</button>
-    </form>
-    FOrmulaire valide ? {{ heroForm.valid }}
+<h1>{{ title }}</h1>
+<div class="container">
+	<app-heroes #heroesComp></app-heroes>
+	<div class="card hero-edit">
+		<h2>Ajouter un nouveau héro :</h2>
+		<form #heroForm="ngForm" class="form-inline"
+			(ngSubmit)="validateHero($event, heroForm)">
+			<label class="mr-2" for="name">Nom</label>
+			<input id="name" name="name" #nameCtrl="ngModel"
+				class="form-control mr-2" [(ngModel)]="newHeroName" required />
+			<span class="error"
+				*ngIf="nameCtrl.invalid && nameCtrl.dirty">
+				Nom du héro obligatoire
+			</span>
+			<button class="btn btn-primary"
+				[disabled]="heroForm.invalid">Ajouter</button>
+		</form>
+		Formulaire valide ? {{ heroForm.valid }}
+	</div>
 </div>
-
