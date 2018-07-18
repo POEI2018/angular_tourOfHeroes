@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, from } from 'rxjs';
 import { Hero } from './hero';
 import { HttpClient } from '@angular/common/http';
 
 import { environment as ENV} from '../environments/environment' ;
+import {switchMap, map, toArray} from 'rxjs/operators' ;
 
 @Injectable({
 providedIn: 'root'
@@ -22,7 +23,12 @@ constructor(private httpClient:HttpClient) {
   }
 
   loadMock() {
-    this.httpClient.get<Array<Hero>>(this.mockUrl) ;
+    this.httpClient.get<Array<Hero>>(this.mockUrl).pipe( 
+    switchMap((array) => from(array)),
+    map((obj) => Object.assign(new Hero(), obj)),
+    toArray()
+    ).subscribe((heroes) => this.subject.next(heroes));
+
     
     }
   }
